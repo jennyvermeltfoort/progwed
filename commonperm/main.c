@@ -2,16 +2,21 @@
 #include <stdio.h>
 
 int main(void) {
-  char c;
+  char c = '!';
 
   do {
     int wc[2][0xFF] = {0};
 
-    c = getchar();
+    if (c != '!') {
+      printf("\n");
+    }
+
     for (int i = 0; i < 2; i++) {
       do {
         wc[i][(int)c]++;
-        c = getchar();
+        do {
+          c = getchar();
+        } while (c == ' ');
       } while (c >= 'a' && c <= 'z');
     }
 
@@ -24,12 +29,5 @@ int main(void) {
         }
       }
     }
-
-    printf("\n");
-
-    if (c < 0) {
-      return 0;
-    }
-
-  } while (true);
+  } while (c >= 0);
 }
