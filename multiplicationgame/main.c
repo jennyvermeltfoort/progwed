@@ -21,33 +21,32 @@ n = 19 stan wint
                 dus 3x2x5 -> stan wint
 ... n = 82
 ... n = 162 stan wint, (9 * 2 * 9) --> zet 3, de twee id de minimal gooi van
-ollie n = 163 ollie wint, (9 * 2 * 9 * 2)
-... n = 1458 olie wint (9 * 2 * 9 * 9) --> zet 4
+ollie n = 163 ollie wint
+... n = 324 ollie wint (9 * 2 * 9 * 2) --> zet 4
 ...
 
 
 */
 
+#include <stdbool.h>
 #include <stdio.h>
 
 int main(void) {
-    int n = 0;
+    unsigned int n = 0;
 
     while (scanf("%i\n", &n) > 0) {
-        int p = 0;
-        if (n > 10) {
-            float t = (float)n / 2.0f;
-            while (t > 1.0f) {
-                p++;
-                t = t / 9.0f;
-            }
-        }
-        printf("%i ", p);
+        bool toggle = false;
+        unsigned int p = 1;
 
-        if (p % 2) {
-            printf("Ollie wins.\n");
-        } else {
+        while (p < n) {
+            p *= 9.0f * !toggle + 2.0f * toggle;
+            toggle = !toggle;
+        }
+
+        if (toggle || n == 1) {
             printf("Stan wins.\n");
+        } else {
+            printf("Ollie wins.\n");
         }
     }
 
